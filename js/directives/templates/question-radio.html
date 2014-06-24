@@ -1,3 +1,11 @@
 <div class="slider">
-  question-radio
+  <div class="quest">&mdash; {{questions.text}} ? &mdash;</div>
+  <div class="answers">
+    <div class="radio" ng-repeat="answer in questions.radio">
+      <label>
+        <input type="radio" name="optionsRadios" id="{{$index}}" value="{{answer}}">
+        {{answer}}
+      </label>
+    </div>
+  </div>
 </div>
