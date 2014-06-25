@@ -1,5 +1,13 @@
 'use strict';
 
+//firebase
+var myDataRef = new Firebase('https://scorching-fire-1793.firebaseio.com/');
+
+myDataRef.on('child_added', function(snapshot) {
+  var message = snapshot.val();
+  console.log('вопрос: '+message.q + ', ответ - '+message.a);
+});
+
 var app = angular.module('askerApp', [
   'ngAnimate',
   'ngResource'
@@ -56,6 +64,9 @@ app.directive("question", function(){
 
       scope.next = function() {
         console.log(scope.current, scope.answ);
+        //myDataRef.set('question ' + scope.current + ':' + scope.answ);
+        myDataRef.push({q: scope.current, a: scope.answ}); //set - full empty, push - add
+
         $('.js-next').attr('disabled','disabled');
 
         if (scope.current < scope.$parent.questions.length - 1) {
