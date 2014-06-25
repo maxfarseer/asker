@@ -1,11 +1,12 @@
 <div class="slider">
-  <div class="quest">&mdash; {{questions.text}} ? &mdash;</div>
+  <div class="quest">&mdash; {{questions.text}} ? {{qq}} &mdash;</div>
   <div class="answers">
     <div class="radio" ng-repeat="answer in questions.radio">
       <label>
-        <input type="radio" name="optionsRadios" id="{{$index}}" value="{{answer}}">
+        <input type="radio" name="optionsRadios" id="{{$index}}" value="{{answer}}" ng-click="setAnswer(answer)">
         {{answer}}
       </label>
     </div>
   </div>
+  <button class="btn btn-sm btn-primary js-next" ng-click="next()" disabled>Ответить</button>
 </div>

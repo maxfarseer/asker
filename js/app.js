@@ -34,7 +34,8 @@ app.directive("question", function(){
     replace: true,
     templateUrl: "js/directives/templates/question-radio.html",
     scope: {
-      questions: "=q"
+      questions: "=q",
+      current: "=current"
     },
 
     link: function(scope, element, attributes){
@@ -43,11 +44,28 @@ app.directive("question", function(){
         /*angular.forEach(questions, function(q, key) {
           console.log(key, q);
         });*/
-
         if (questions) { //вопросы приехали
           scope.questions = questions;
         }
       });
+
+      scope.setAnswer = function(answ) {
+        scope.answ = answ;
+        $('.js-next').removeAttr('disabled');
+      }
+
+      scope.next = function() {
+        console.log(scope.current, scope.answ);
+        $('.js-next').attr('disabled','disabled');
+
+        if (scope.current < scope.$parent.questions.length - 1) {
+          scope.current = scope.current + 1;
+        } else {
+          scope.current = 0;
+        }
+
+        return scope.current;
+      }
     }
     /*controller: function($scope){
 
