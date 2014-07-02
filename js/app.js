@@ -20,9 +20,9 @@ app.run([
   }
 ]);
 
-
-
 app.controller('mainCtrl', ['$scope', '$filter', '$timeout', '$http', function ($scope, $filter, $timeout, $http, questions) {
+
+  $scope.vkUser = ASKER.vkUser;
 
   $scope.$rest.questions.load({}).$promise.then(next);
 
