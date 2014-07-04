@@ -1,85 +1,48 @@
 'use strict';
 
-//firebase
-var myDataRef = new Firebase('https://scorching-fire-1793.firebaseio.com/');
-
-myDataRef.on('child_added', function(snapshot) {
-  var message = snapshot.val();
-  console.log('вопрос: '+message.q + ', ответ - '+message.a);
-});
-
 var app = angular.module('askerApp', [
   'ngAnimate',
-  'ngResource'
+  'ngResource',
+  'ui.router'
 ]);
 
-app.run([
-  '$rootScope', '$rest', function ($rootScope, $rest) {
-    $rootScope.$rest = $rest;
-    $rootScope.root = $rootScope;
-  }
-]);
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-app.controller('mainCtrl', ['$scope', '$filter', '$timeout', '$http', function ($scope, $filter, $timeout, $http, questions) {
+  $urlRouterProvider.otherwise('/home');
 
-  $scope.vkUser = ASKER.vkUser;
+  $stateProvider
 
-  $scope.$rest.questions.load({}).$promise.then(next);
+    // HOME STATES AND NESTED VIEWS ========================================
+    .state('home', {
+        url: '/home',
+        templateUrl: '/js/views/home/home.html'
+    })
 
-  function next(data) {
-    $scope.questions = data.result;
-  }
+    .state('home.authors', {
+        url: '/authors',
+        templateUrl: '/js/views/home/authors.html',
+        controller: function($scope) {
+            $scope.authors = ['Злой школьник', 'Тимми'];
+        }
+    })
 
-  $scope.currentIndex = 0;
+    .state('home.participants', {
+        url: '/participants',
+        templateUrl: '/js/views/home/participants.html',
+        controller: function($scope) {
+            $scope.vkUser = ASKER.vkUser;
+        }
+    })
+
+    // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+    .state('about', {
+        // we'll get to this in a bit
+    });
 
 }]);
 
+app.controller('mainCtrl', ['$scope', function ($scope) {
 
+  //$scope.vkUser = ASKER.vkUser;
 
-app.directive("question", function(){
-  return {
-    restrict: "EA",
-    replace: true,
-    templateUrl: "js/directives/templates/question-radio.html",
-    scope: {
-      questions: "=q",
-      current: "=current"
-    },
-
-    link: function(scope, element, attributes){
-      //scope.currentIndex = 1; // Initially the index is at the first image
-      scope.$watch('questions', function(questions) {
-        /*angular.forEach(questions, function(q, key) {
-          console.log(key, q);
-        });*/
-        if (questions) { //вопросы приехали
-          scope.questions = questions;
-        }
-      });
-
-      scope.setAnswer = function(answ) {
-        scope.answ = answ;
-        $('.js-next').removeAttr('disabled');
-      }
-
-      scope.next = function() {
-        console.log(scope.current, scope.answ);
-        //myDataRef.set('question ' + scope.current + ':' + scope.answ);
-        myDataRef.push({q: scope.current, a: scope.answ}); //set - full empty, push - add
-
-        $('.js-next').attr('disabled','disabled');
-
-        if (scope.current < scope.$parent.questions.length - 1) {
-          scope.current = scope.current + 1;
-        } else {
-          scope.current = 0;
-        }
-
-        return scope.current;
-      }
-    }
-    /*controller: function($scope){
-
-    }*/
-   };
-});
+}]);

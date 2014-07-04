@@ -2,12 +2,6 @@
 
 var ASKER = ASKER || {};
 
-VK.init(function() {
-  ASKER.init();
-}, function() {
-   console.log('vk API fail');
-}, '5.21');
-
 ASKER.init = function() {
 
   //получаем flashVars, значения - http://vk.com/dev/apps_init
@@ -22,7 +16,16 @@ ASKER.init = function() {
   // получаем viewer_id из полученных переменных
   ASKER.userId = flashVars['viewer_id'];
   setUserInfo(ASKER.userId);
+
 };
+
+VK.init(function() {
+  ASKER.init();
+}, function() {
+   console.log('vk API fail');
+}, '5.21');
+
+
 
 function setUserInfo(uid) {
   VK.api('users.get', {user_ids:uid, test_mode: 1}, function(r) {
