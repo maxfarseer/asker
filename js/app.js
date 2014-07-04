@@ -11,32 +11,62 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
   $urlRouterProvider.otherwise('/home');
 
   $stateProvider
-
-    // HOME STATES AND NESTED VIEWS ========================================
     .state('home', {
         url: '/home',
         templateUrl: '/js/views/home/home.html'
     })
-
-    .state('home.authors', {
-        url: '/authors',
-        templateUrl: '/js/views/home/authors.html',
+    .state('step-100-choose-friends', {
+        url: '/step-100-choose-friends',
+        templateUrl: '/js/views/steps/step-100-choose-friends.html',
         controller: function($scope) {
-            $scope.authors = ['Злой школьник', 'Тимми'];
+            $scope.friendCounter = 0;
+            $scope.vkFriends = ASKER.vkFriends;
+            //$rootScope.team = [];
+
+            $scope.chooseFriend = function(friend) {
+              if (!friend.checked && $scope.friendCounter < 4) {
+                friend.checked = true;
+                $scope.friendCounter++;
+              } else if (friend.checked) {
+                friend.checked = false;
+                $scope.friendCounter--;
+              } else {
+                //
+              }
+            };
+
+            $scope.setTeam = function() {
+              console.log(123);
+              var team = []
+              _.each($scope.vkFriends, function(o) {
+                if (o.checked) {
+                  team.push(o);
+                }
+              });
+              ASKER.team = team;
+            };
+
         }
     })
-
-    .state('home.participants', {
-        url: '/participants',
-        templateUrl: '/js/views/home/participants.html',
+    .state('step-200-choose-music', {
+        url: '/step-200-choose-music',
+        templateUrl: '/js/views/steps/step-200-choose-music.html',
         controller: function($scope) {
-            $scope.vkUser = ASKER.vkUser;
+          $scope.team = ASKER.team;
+          $scope.vkAudio = ASKER.vkAudio;
         }
     })
-
-    // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
     .state('about', {
-        // we'll get to this in a bit
+        url: '/about',
+        views: {
+          '': { templateUrl: '/js/views/about.html' },
+          'columnOne@about': { template: 'Look I am a column!' },
+          'columnTwo@about': {
+              template: 'Look, I am second!',
+              //templateUrl: 'table-data.html',
+              //controller: 'scotchController'
+          }
+        }
     });
 
 }]);

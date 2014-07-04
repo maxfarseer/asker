@@ -15,7 +15,7 @@ ASKER.init = function() {
 
   // получаем viewer_id из полученных переменных
   ASKER.userId = flashVars['viewer_id'];
-  setUserInfo(ASKER.userId);
+  setVkVariables(ASKER.userId);
 
 };
 
@@ -27,11 +27,19 @@ VK.init(function() {
 
 
 
-function setUserInfo(uid) {
+function setVkVariables(uid) {
   VK.api('users.get', {user_ids:uid, test_mode: 1}, function(r) {
     ASKER.vkUser = {
       firstName: r.response[0].first_name,
       lastName: r.response[0].last_name
     };
+  });
+
+  VK.api('friends.get', {user_id:uid, order:'hints', fields: 'nickname,sex,photo_50,photo_100,photo_200_orig,online', test_mode: 1}, function(r) {
+    ASKER.vkFriends = r.response.items;
+  });
+
+  VK.api('audio.get', {owner_id:uid, test_mode: 1}, function(r) {
+    ASKER.vkAudio = r.response.items;
   });
 };

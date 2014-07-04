@@ -10,29 +10,15 @@
 <body ng-app="askerApp" ng-controller="mainCtrl">
 
   <div class="container">
-    <!-- <div class="row">
-      <div class="col-md-12">
-        Загружаются плюшки...
-      </div>
-    </div> -->
-    <div class="row">
-      <div class="col-md-12">
-        <a class="btn btn-success" ui-sref="home">Домой</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <a class="btn btn-success" ui-sref="questions">Поехали</a>
-      </div>
-    </div>
-
+    <header></header>
     <div ui-view></div>
-
+    <footer></footer>
   </div>
 
 
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/lodash/dist/lodash.min.js"></script>
 
   <!-- angular -->
   <script src="bower_components/angular/angular.js"></script>

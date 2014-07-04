@@ -1,0 +1,20 @@
+<div class="step-100">
+  <h3>Выбери друзей в пати: {{friendCounter}} из 4</h3>
+  <div class="friends col-md-12">
+    <div ng-repeat="friend in vkFriends">
+      <div class="one-friend" ng-click="chooseFriend(friend)" ng-class="{'one-friend_checked':friend.checked}" ng-animate="'animate'">
+        <img class="one-friend__img" ng-src="{{friend.photo_50}}" alt="{{friend.last_name}} {{friend.first_name}}" />
+        <div class="one-friend__label">
+          {{friend.last_name}}
+          <br>
+          {{friend.first_name}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <a ui-sref="step-200-choose-music" class="btn btn-danger" ng-disabled="!(friendCounter === 4)" ng-click="setTeam()">Собрал пати? {{!(friendCounter === 4)}} Погнали!</a>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,34 @@
+header {
+  margin-bottom: 15px;
+}
 .slider {
   border: 1px solid #000;
   padding: 10px;
+}
+.friends {
+  height: 300px;
+  overflow-y: auto;
+  cursor: pointer;
+  float: left;
+  clear: both;
+}
+.one-friend {
+  width: 70px;
+  float: left;
+  text-align: center;
+  margin: 2px;
+  border-radius: 2px;
+}
+.one-friend_checked {
+  background: #930000;
+  color: #FFF;
+}
+.one-friend__img {
+  padding: 3px 0 0 0;
+}
+.one-friend__label {
+  font-size: 10px;
+}
+.btn-next {
+  margin: 10px auto;
 }
