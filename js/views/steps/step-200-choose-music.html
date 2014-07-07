@@ -1,16 +1,22 @@
 <div class="step-100">
-  <h3>Выбери трэк, под который ты тащишь всегда вместе</h3>
+  <h3>Выбери трэк, под который ты тащишь всегда</h3>
   <div class="tracks col-md-12">
     <div ng-repeat="track in vkAudio">
       <div class="one-track">
-        <div class="one-track__artist">{{track.artist}}</div>
-        <div class="one-track__title">{{track.title}}</div>
+          <div class="one-track__ico">
+            <span class="glyphicon glyphicon-headphones"></span>
+          </div>
+          <div class="one-track-info">
+            <div class="one-track-info__artist">{{track.artist}}</div>
+            <div class="one-track-info__title">{{track.title}}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <!-- <a ui-sref="" class="btn btn-danger" ng-disabled="false">Двигай дальше!</a> ВЫНЕСТИ В ОТДЕЛЬНЫЙ инклуд -->
+     <a ui-sref="step-300-choose-commentator" class="btn btn-danger" ng-disabled="false">Двигай дальше, выбор трека не работает!</a> <!-- ВЫНЕСТИ В ОТДЕЛЬНЫЙ инклуд -->
     </div>
   </div>
 </div>

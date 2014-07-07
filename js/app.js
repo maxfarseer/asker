@@ -56,6 +56,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
           $scope.vkAudio = ASKER.vkAudio;
         }
     })
+    .state('step-300-choose-commentator', {
+        url: '/step-300-choose-commentator',
+        templateUrl: '/js/views/steps/step-300-choose-commentator.html',
+        controller: function($scope) {
+          $scope.commentators = ['v1lat, versuta, casper'];
+        }
+    })
     .state('about', {
         url: '/about',
         views: {
