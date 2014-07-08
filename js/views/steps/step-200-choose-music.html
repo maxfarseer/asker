@@ -1,8 +1,8 @@
-<div class="step-100">
+<div class="step">
   <h3>Выбери трэк, под который ты тащишь всегда</h3>
   <div class="tracks col-md-12">
     <div ng-repeat="track in vkAudio">
-      <div class="one-track">
+      <div class="one-track" ng-click="setChecked(track,1)" ng-class="{'checked':track.checked}">
           <div class="one-track__ico">
             <span class="glyphicon glyphicon-headphones"></span>
           </div>
@@ -16,7 +16,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-     <a ui-sref="step-300-choose-commentator" class="btn btn-danger" ng-disabled="false">Двигай дальше, выбор трека не работает!</a> <!-- ВЫНЕСТИ В ОТДЕЛЬНЫЙ инклуд -->
+     <a ui-sref="step-300-choose-commentator" class="btn btn-danger" ng-disabled="!(answers === 1)" ng-click="setAnswers('vkAudio','music')">Дальше!</a>
     </div>
   </div>
 </div>

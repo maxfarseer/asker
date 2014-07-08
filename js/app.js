@@ -13,40 +13,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
   $stateProvider
     .state('home', {
         url: '/home',
-        templateUrl: '/js/views/home/home.html'
+        templateUrl: '/js/views/home/home.html',
+        controller: 'mainCtrl'
     })
     .state('step-100-choose-friends', {
         url: '/step-100-choose-friends',
         templateUrl: '/js/views/steps/step-100-choose-friends.html',
-        controller: function($scope) {
-            $scope.friendCounter = 0;
-            $scope.vkFriends = ASKER.vkFriends;
-            //$rootScope.team = [];
-
-            $scope.chooseFriend = function(friend) {
-              if (!friend.checked && $scope.friendCounter < 4) {
-                friend.checked = true;
-                $scope.friendCounter++;
-              } else if (friend.checked) {
-                friend.checked = false;
-                $scope.friendCounter--;
-              } else {
-                //
-              }
-            };
-
-            $scope.setTeam = function() {
-              console.log(123);
-              var team = []
-              _.each($scope.vkFriends, function(o) {
-                if (o.checked) {
-                  team.push(o);
-                }
-              });
-              ASKER.team = team;
-            };
-
-        }
+        controller: 'Step100Ctrl'
     })
     .state('step-200-choose-music', {
         url: '/step-200-choose-music',
@@ -61,6 +34,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         templateUrl: '/js/views/steps/step-300-choose-commentator.html',
         controller: function($scope) {
           $scope.commentators = ['v1lat, versuta, casper'];
+          $scope.asker = ASKER;
         }
     })
     .state('about', {
@@ -79,7 +53,30 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 }]);
 
 app.controller('mainCtrl', ['$scope', function ($scope) {
+  $scope.answers = 0;
 
-  //$scope.vkUser = ASKER.vkUser;
+  $scope.setChecked = function(obj, max) {
+    if (!obj.checked && $scope.answers < max) {
+      obj.checked = true;
+      $scope.answers++;
+    } else if (obj.checked) {
+      obj.checked = false;
+      $scope.answers--;
+    } else {
+      //
+    }
+  };
+
+  $scope.setAnswers = function(collection, name) {
+    var answers = []
+    _.each(ASKER[collection], function(o) {
+      if (o.checked) {
+        answers.push(o);
+      }
+    });
+    ASKER[name] = answers;
+    $scope.answers = 0;
+    console.log(ASKER);
+  };
 
 }]);

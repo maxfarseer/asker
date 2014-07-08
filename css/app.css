@@ -34,6 +34,9 @@ header {
 .one-friend__label, .one-track-info {
   font-size: 10px;
 }
+.one-friend__label {
+  height: 27px;
+}
 .btn-next {
   margin: 10px auto;
 }
