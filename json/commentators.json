@@ -2,16 +2,16 @@
   "result":
   [
     {
-      "original": "v1lat",
-      "fun": "v1lat aka @vsevartsyle"
+      "originalName": "v1lat",
+      "funName": "v1lat aka @vsevartsyle"
     },
     {
-      "original": "versuta",
-      "fun": "versuta aka @sonofdog"
+      "originalName": "versuta",
+      "funName": "versuta aka @sonofdog"
     },
     {
-      "original": "casper",
-      "fun": "casper aka @wrongbarrac"
+      "originalName": "casper",
+      "funName": "casper aka @wrongbarrac"
     }
   ]
 }

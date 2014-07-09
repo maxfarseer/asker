@@ -32,10 +32,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('step-300-choose-commentator', {
         url: '/step-300-choose-commentator',
         templateUrl: '/js/views/steps/step-300-choose-commentator.html',
-        controller: function($scope) {
-          $scope.commentators = ['v1lat, versuta, casper'];
-          $scope.asker = ASKER;
-        }
+        controller: 'Step300Ctrl'
+    })
+    .state('step-400-questions', {
+        url: '/step-400-questions',
+        templateUrl: '/js/views/steps/step-400-questions.html',
+        //controller: 'Step300Ctrl'
     })
     .state('about', {
         url: '/about',
@@ -52,23 +54,38 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 }]);
 
+app.run(['$rootScope','$rest', function ($rootScope, $rest) {
+  $rootScope.$rest = $rest;
+  $rootScope.root = $rootScope;
+}]);
+
 app.controller('mainCtrl', ['$scope', function ($scope) {
   $scope.answers = 0;
 
-  $scope.setChecked = function(obj, max) {
+  $scope.setCheckedOne = function(obj, collection) {
+    var checkedObj = _.find(collection, {checked: true});
+    if (checkedObj) {
+      checkedObj.checked = false;
+    }
+    obj.checked = true;
+    $scope.answers = 1;
+  };
+
+  $scope.setChecked = function(obj, max, collection) {
     if (!obj.checked && $scope.answers < max) {
       obj.checked = true;
       $scope.answers++;
-    } else if (obj.checked) {
-      obj.checked = false;
-      $scope.answers--;
     } else {
-      //
+      if (obj.checked) {
+        obj.checked = false;
+        $scope.answers--;
+      }
     }
   };
 
   $scope.setAnswers = function(collection, name) {
-    var answers = []
+    var answers = [];
+
     _.each(ASKER[collection], function(o) {
       if (o.checked) {
         answers.push(o);
@@ -76,7 +93,7 @@ app.controller('mainCtrl', ['$scope', function ($scope) {
     });
     ASKER[name] = answers;
     $scope.answers = 0;
-    console.log(ASKER);
+    debugger;
   };
 
 }]);

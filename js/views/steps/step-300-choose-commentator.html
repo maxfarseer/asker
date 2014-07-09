@@ -2,13 +2,18 @@
   <h3>Выбери комментатора</h3>
   <div class="row">
     <div class="commentators col-md-12">
-      в процессе {{commentators}}
-    </div>
-    <div class="test">
-      {{asker.team}}
-    </div>
-    <div class="test">
-      {{asker.music}}
-    </div>
+      <div ng-repeat="commentator in commentators">
+        <!-- setCheck(object, maximum answers) -->
+        <div class="one-commentator" ng-click="setCheckedOne(commentator,commentators)" ng-class="{'checked':commentator.checked}">
+          <img src="LINK" alt="commentator.originalName">
+          <div class="one-commentator__label">
+            {{commentator.funName}}
+          </div>
+        </div>
+      </div>
+    </div> <!-- ./commentators -->
   </div>
+
+  <asker-next url="'step-400-questions'" label="'Пора проверить знания'" maximum="1" for-storing-data="['commentators','commentator']"></asker-next>
+
 </div>

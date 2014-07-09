@@ -9,6 +9,9 @@ angular.module('askerApp')
     var rest = {
       questions: $resource(root+ 'json/questions.json', {}, {
         load: {method: 'GET'}
+      }),
+      commentators: $resource(root+ 'json/commentators.json', {}, {
+        load: {method: 'GET'}
       })
     };
 
