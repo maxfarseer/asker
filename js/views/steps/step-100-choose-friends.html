@@ -15,10 +15,7 @@
       </div>
     </div>
   </div>
-  <asker-next url="'step-200-choose-music'" answers="answers" label="'Собрал пати? Погнали!'" maximum="4" store-obj="'vkFriends'" store-name="'team'"></asker-next>
-  <!-- <div class="row">
-    <div class="col-md-12">
-      <a ui-sref="step-200-choose-music" class="btn btn-danger" ng-disabled="!(answers === 4)" ng-click="setAnswers('vkFriends','team')">Собрал пати? Погнали!</a>
-    </div>
-  </div> -->
+
+  <asker-next url="'step-200-choose-music'" answers="answers" label="'Собрал пати? Погнали!'" maximum="4" handler="setAnswers('vkFriends', 'team')"></asker-next>
+
 </div>

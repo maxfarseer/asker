@@ -1,19 +1,28 @@
 <div class="step">
-  <h3>Выбери комментатора</h3>
+  <h3>Ответь на вопросы</h3>
   <div class="row">
     <div class="col-md-12">
-      {{ASKER.team}}
+      <h4>{{questions[questionNumber].text}}</h4>
+    </div>
+    <div class="col-md-12" ng-show="!questEnd">
+      <i>Кликни для ответа на нужную строку</i>
+    </div>
+    <div ng-repeat="answ in questions[questionNumber].radio" class="answers">
+      <div ng-click="setAnswer(answ)" class="answer">{{answ}}</div>
+    </div>
+    <div ng-show="questEnd">
+      <img src="i/ico_tolya.png"> Давай я расскажу о твоих ответах:
+      <ul ng-repeat="a in userAnswers">
+        <li>{{a}}</li>
+      </ul>
     </div>
   </div>
-  <div class="row">
+  <div class="row" ng-show="questEnd">
     <div class="col-md-12">
-      {{ASKER.music}}
+      <h4>Немного инфы, которую ты выбрал в VK</h4>
+      <div>{{ASKER.team}}</div>
+      <div>{{ASKER.music}}</div>
+      <div>{{ASKER.commentator}}</div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      {{ASKER.commentator}}
-    </div>
-  </div>
-
 </div>

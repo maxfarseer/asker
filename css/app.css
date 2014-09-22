@@ -46,3 +46,9 @@ header {
 .one-track-info__artist {
   font-weight: bold;
 }
+.answer {
+  cursor: pointer;
+}
+.answer:hover {
+  color: #A94442;
+}

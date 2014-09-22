@@ -24,10 +24,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('step-200-choose-music', {
         url: '/step-200-choose-music',
         templateUrl: '/js/views/steps/step-200-choose-music.html',
-        controller: function($scope) {
-          $scope.team = ASKER.team;
-          $scope.vkAudio = ASKER.vkAudio;
-        }
+        controller: 'Step200Ctrl'
     })
     .state('step-300-choose-commentator', {
         url: '/step-300-choose-commentator',
@@ -37,7 +34,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('step-400-questions', {
         url: '/step-400-questions',
         templateUrl: '/js/views/steps/step-400-questions.html',
-        //controller: 'Step300Ctrl'
+        controller: 'Step400Ctrl'
     })
     .state('about', {
         url: '/about',
@@ -61,8 +58,10 @@ app.run(['$rootScope','$rest', function ($rootScope, $rest) {
 
 app.controller('mainCtrl', ['$scope', function ($scope) {
   $scope.answers = 0;
+  $scope.ASKER = ASKER;
 
   $scope.setCheckedOne = function(obj, collection) {
+
     var checkedObj = _.find(collection, {checked: true});
     if (checkedObj) {
       checkedObj.checked = false;
@@ -86,14 +85,21 @@ app.controller('mainCtrl', ['$scope', function ($scope) {
   $scope.setAnswers = function(collection, name) {
     var answers = [];
 
-    _.each(ASKER[collection], function(o) {
-      if (o.checked) {
-        answers.push(o);
-      }
-    });
+    if (typeof(collection) === 'string') {
+      _.each(ASKER[collection], function(o) {
+        if (o.checked) {
+          answers.push(o);
+        }
+      });
+    } else {
+      _.each(collection, function(o) {
+        if (o.checked) {
+          answers.push(o);
+        }
+      });
+    }
     ASKER[name] = answers;
     $scope.answers = 0;
-    debugger;
   };
 
 }]);

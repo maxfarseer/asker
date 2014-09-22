@@ -6,12 +6,13 @@ angular.module('askerApp')
       replace: true,
       templateUrl: "js/directives/templates/asker-next.html",
       scope: {
-        label: "=label",
-        maximum: "=maximum",
-        answers: "=answers",
-        storeObj: "=storeObj",
-        storeName: "=storeName",
-        url: '=url'
+        label: "=",
+        maximum: "=",
+        answers: "=",
+        storeObj: "=",
+        storeName: "=",
+        handler: "&",
+        url: '='
       },
       link: function(scope, element, attributes){
         scope.$watch('answers', function() {
